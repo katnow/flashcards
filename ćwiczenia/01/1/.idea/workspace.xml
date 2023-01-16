@@ -20,6 +20,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cw1" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -30,6 +31,7 @@
       <option name="presentableId" value="Default" />
       <updated>1665846204482</updated>
       <workItem from="1665846205872" duration="153000" />
+      <workItem from="1665847744242" duration="34000" />
     </task>
     <servers />
   </component>
