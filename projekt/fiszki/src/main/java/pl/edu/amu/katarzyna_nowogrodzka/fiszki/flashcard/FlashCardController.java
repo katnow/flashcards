@@ -3,6 +3,7 @@ package pl.edu.amu.katarzyna_nowogrodzka.fiszki.flashcard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -31,5 +32,11 @@ public class FlashCardController {
         flashCardService.deleteFlashCard(flashCardId);
     }
 
-
+    @PutMapping("{flashCardId}")
+    public void updateFlashCard(
+            @PathVariable("flashCardId") Long flashCardId,
+            @RequestParam(required = false) String word,
+            @RequestParam(required = false) String translation) {
+        flashCardService.updateFlashCard(flashCardId, word, translation);
+    }
 }
