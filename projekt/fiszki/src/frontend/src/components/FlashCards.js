@@ -16,7 +16,7 @@ function FlashCards() {
     console.log(flashCards)
     
   return (
-    <FlashCard flashcard={flashCards[currentFlashCard-1]}/>
+    <FlashCard flashcard={flashCards[currentFlashCard-1]} setCurrentFlashCard={setCurrentFlashCard}/>
   )
 }
 
