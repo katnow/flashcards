@@ -16,6 +16,7 @@ public class FlashCardController {
         this.flashCardService = flashCardService;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
     public List<FlashCard> getFlashCards() {
         return flashCardService.getFlashCards();
@@ -38,5 +39,14 @@ public class FlashCardController {
             @RequestParam(required = false) String word,
             @RequestParam(required = false) String translation) {
         flashCardService.updateFlashCard(flashCardId, word, translation);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PutMapping("{flashCardId}/{option}")
+    public void changeFlashCardLevel(
+            @PathVariable("flashCardId") Long flashCardId,
+            @PathVariable("option") Integer option
+    ) {
+        flashCardService.changeFlashCardLevel(flashCardId, option);
     }
 }

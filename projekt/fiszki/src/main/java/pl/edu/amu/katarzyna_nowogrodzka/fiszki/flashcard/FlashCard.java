@@ -27,16 +27,19 @@ public class FlashCard {
         private String word;
 
         private String translation;
-        private LocalDate lastReview;
+        private LocalDate nextReview;
 
         private Integer level;
-        public FlashCard() {
+        public FlashCard(String word, String translation) {
+            this.word = word;
+            this.translation = translation;
+            this.level = 0;
         }
 
-    public FlashCard(String word, String translation, LocalDate lastReview, Integer level) {
+    public FlashCard(String word, String translation, LocalDate nextReview, Integer level) {
         this.word = word;
         this.translation = translation;
-        this.lastReview = lastReview;
+        this.nextReview = nextReview;
         this.level = level;
     }
 }

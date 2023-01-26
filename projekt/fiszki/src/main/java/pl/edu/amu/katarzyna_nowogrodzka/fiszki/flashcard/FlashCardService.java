@@ -4,9 +4,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class FlashCardService {
@@ -57,5 +55,30 @@ public class FlashCardService {
         if (translation != null && translation.length() > 0) {
             flashCard.setTranslation(translation);
         }
+    }
+
+    @Transactional
+    public void changeFlashCardLevel(Long flashCardId, Integer option) {
+        int[] levelsInDays = new int[] {0, 1, 2, 3, 5, 9, 14, 21, 28};
+        FlashCard flashCard = flashCardRepository.findById(flashCardId)
+                .orElseThrow(() -> new IllegalStateException(
+                        "flashcard with id " + flashCardId + " does not exist"
+                ));
+        if (option == 0) {
+            flashCard.setLevel(0);
+        } else if (option == 2 && flashCard.getLevel() != 8) {
+            int currentLevel = flashCard.getLevel();
+            flashCard.setLevel(currentLevel + 1);
+        }
+
+
+        int currentLevel = flashCard.getLevel();
+
+        int daysCount = levelsInDays[currentLevel];
+
+        LocalDate today = LocalDate.now();
+        LocalDate  nextReview = today.plusDays(daysCount);
+
+        flashCard.setNextReview(nextReview);
     }
 }
