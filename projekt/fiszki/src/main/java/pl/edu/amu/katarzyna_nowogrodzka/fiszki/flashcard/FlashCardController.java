@@ -1,9 +1,7 @@
 package pl.edu.amu.katarzyna_nowogrodzka.fiszki.flashcard;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,4 +19,11 @@ public class FlashCardController {
     public List<FlashCard> getFlashCards() {
         return flashCardService.getFlashCards();
     }
+
+    @PostMapping
+    public void registerFlashCard(@RequestBody FlashCard flashCard) {
+        flashCardService.addNewFlashCard(flashCard);
+    }
+
+
 }
