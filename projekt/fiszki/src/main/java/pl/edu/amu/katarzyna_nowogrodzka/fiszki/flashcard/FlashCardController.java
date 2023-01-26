@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path="api/flashcards/")
+@RequestMapping(path="api/flashcards")
 public class FlashCardController {
     public final FlashCardService flashCardService;
 
@@ -23,6 +23,12 @@ public class FlashCardController {
     @PostMapping
     public void registerFlashCard(@RequestBody FlashCard flashCard) {
         flashCardService.addNewFlashCard(flashCard);
+    }
+
+    @DeleteMapping("{flashCardId}")
+    public void deleteFlashCard(@PathVariable("flashCardId") Long flashCardId) {
+        System.out.println("Helo");
+        flashCardService.deleteFlashCard(flashCardId);
     }
 
 

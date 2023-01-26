@@ -20,11 +20,19 @@ public class FlashCardService {
     public void addNewFlashCard(FlashCard flashCard) {
         Optional<FlashCard> flashCardOptional = flashCardRepository.findFlashCardByWord(flashCard.getWord());
 
-//        if (flashCardOptional.isPresent()) {
-//            if (flashCardOptional.get().getTranslation() == flashCard.getTranslation()) {
-//                throw new IllegalStateException("word exists");
-//            }
-//        }
+        if (flashCardOptional.isPresent()) {
+                throw new IllegalStateException("word exists");
+        }
             flashCardRepository.save(flashCard);
+    }
+
+    public void deleteFlashCard(Long flashCardId) {
+        boolean exists = flashCardRepository.existsById(flashCardId);
+
+        if (!exists) {
+            throw new IllegalStateException("flashcard with id " + flashCardId + " does not exist");
+        }
+
+        flashCardRepository.deleteById(flashCardId);
     }
 }
