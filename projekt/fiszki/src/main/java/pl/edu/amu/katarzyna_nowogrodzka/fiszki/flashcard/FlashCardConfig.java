@@ -8,15 +8,15 @@ import java.util.List;
 
 @Configuration
 public class FlashCardConfig {
-    @Bean
-    CommandLineRunner commandLineRunner(FlashCardRepository flashCardRepository) {
-        return args -> {
-            FlashCard f1 = new FlashCard("słońce", "sun");
-            FlashCard f2 = new FlashCard("wiatr", "wind");
-
-            flashCardRepository.saveAll(
-                    List.of(f1, f2)
-            );
-        };
-    }
+//    @Bean
+//    CommandLineRunner commandLineRunner(FlashCardRepository flashCardRepository) {
+//        return args -> {
+//            FlashCard f1 = new FlashCard("słońce", "sun");
+//            FlashCard f2 = new FlashCard("wiatr", "wind");
+//
+//            flashCardRepository.saveAll(
+//                    List.of(f1, f2)
+//            );
+//        };
+//    }
 }
