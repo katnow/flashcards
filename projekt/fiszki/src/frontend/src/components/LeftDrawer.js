@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-export default function TemporaryDrawer({drawerOpen, setDrawerOpen, setDisplayModal}) {
+export default function TemporaryDrawer({drawerOpen, setDrawerOpen, setDisplayModal, setMode}) {
  
 
   let anchor = 'left';
@@ -40,7 +40,22 @@ export default function TemporaryDrawer({drawerOpen, setDrawerOpen, setDisplayMo
     >
     <Divider/>
       <List>
-
+          <ListItem disablePadding>
+            <ListItemButton onClick={() => {setMode("learn")}}>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Ucz sie'} />
+            </ListItemButton>
+          </ListItem>
+        <ListItem disablePadding>
+            <ListItemButton onClick={() => {setMode("review")}}>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Powtórki'} />
+            </ListItemButton>
+          </ListItem>
         <ListItem disablePadding>
             <ListItemButton onClick={() => setDisplayModal(true)}>
               <ListItemIcon>
@@ -50,7 +65,7 @@ export default function TemporaryDrawer({drawerOpen, setDrawerOpen, setDisplayMo
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => {setMode("list")}}>
               <ListItemIcon>
                 <MailIcon />
               </ListItemIcon>

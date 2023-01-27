@@ -33,6 +33,16 @@ public class FlashCardService {
         }
     }
 
+    public List<FlashCard> getNewFlashCards() {
+        if (flashCardRepository.count() == 0) {
+            throw new RuntimeException("Brak fiszek");
+        } else {
+            return flashCardRepository.findAll().stream()
+                    .filter(flashCard -> flashCard.getLevel() == 0)
+                    .collect(Collectors.toList());
+        }
+    }
+
     public int checkDatesDifference(LocalDate date1, LocalDate date2) {
         Period period = Period.between(date1, date2);
         int days = period.getDays();

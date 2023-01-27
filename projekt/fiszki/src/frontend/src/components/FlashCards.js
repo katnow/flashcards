@@ -1,21 +1,30 @@
 import React, {useState, useEffect} from 'react';
 import FlashCard from './FlashCard';
+import NoFlashCardsInfo from './NoFlashCardsInfo';
 
-function FlashCards() {
+function FlashCards({mode}) {
     const [flashCards, setFlashCards] = useState([]);
     const [currentFlashCard, setCurrentFlashCard] = useState(1);
 
-    const getFlashCardsToReview = () => {
+    const getFlashCards = () => {
+      if (mode === "review") {
         fetch("http://localhost:8080/api/flashcards/review/").then(res => {
             res.json().then(data => {
                 setFlashCards(data)
             })
         })
+      } else if (mode === "learn") {
+        fetch("http://localhost:8080/api/flashcards/learn/").then(res => {
+            res.json().then(data => {
+                setFlashCards(data)
+            })
+        })
+      }
     }
 
     useEffect(() => {
-        getFlashCardsToReview();
-    },[])
+        getFlashCards();
+    },[mode])
     
     const checkFlashCardAvailability = (index) => {
       if (flashCards[currentFlashCard - 1]) {
@@ -28,9 +37,13 @@ function FlashCards() {
 
     if (flashCards.length > 0) {
       return (
-        <FlashCard flashcard={checkFlashCardAvailability(currentFlashCard)} setCurrentFlashCard={setCurrentFlashCard} getFlashCardsToReview={getFlashCardsToReview}/>
+        <FlashCard flashcard={checkFlashCardAvailability(currentFlashCard)} setCurrentFlashCard={setCurrentFlashCard} getFlashCardsToReview={getFlashCards}/>
       ) 
-    } else {}
+    } else {
+      return (
+        <NoFlashCardsInfo />
+      )
+    }
 }
 
 export default FlashCards
