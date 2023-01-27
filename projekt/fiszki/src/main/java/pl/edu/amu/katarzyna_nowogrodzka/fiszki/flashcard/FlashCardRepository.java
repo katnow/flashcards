@@ -8,6 +8,11 @@ import java.util.Optional;
 
 @Repository
 public interface FlashCardRepository extends JpaRepository<FlashCard, Long> {
-    @Query("SELECT f FROM FlashCard f WHERE f.word = ?1")
-    Optional<FlashCard> findFlashCardByWord(String word);
+    @Query("" +
+            "SELECT CASE WHEN COUNT(s) > 0 THEN " +
+            "TRUE ELSE FALSE END " +
+            "FROM FlashCard s " +
+            "WHERE s.word = ?1"
+    )
+    Boolean findFlashCardByWord(String word);
 }

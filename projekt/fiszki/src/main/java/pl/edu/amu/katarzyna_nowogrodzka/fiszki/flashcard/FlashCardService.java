@@ -2,6 +2,7 @@ package pl.edu.amu.katarzyna_nowogrodzka.fiszki.flashcard;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.edu.amu.katarzyna_nowogrodzka.fiszki.flashcard.exception.BadRequestException;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -19,10 +20,10 @@ public class FlashCardService {
     }
 
     public void addNewFlashCard(FlashCard flashCard) {
-        Optional<FlashCard> flashCardOptional = flashCardRepository.findFlashCardByWord(flashCard.getWord());
+        Boolean existsWord = flashCardRepository.findFlashCardByWord(flashCard.getWord());
 
-        if (flashCardOptional.isPresent()) {
-                throw new IllegalStateException("word exists");
+        if (existsWord) {
+                throw new BadRequestException("word exists");
         }
             flashCardRepository.save(flashCard);
     }
@@ -47,8 +48,7 @@ public class FlashCardService {
                  ));
 
         if (word != null && word.length() > 0 && !Objects.equals(flashCard.getWord(), word)) {
-            Optional<FlashCard> flashCardOptional = flashCardRepository.findFlashCardByWord(word);
-
+            Boolean flashCardExists = flashCardRepository.findFlashCardByWord(word);
             flashCard.setWord(word);
         }
 

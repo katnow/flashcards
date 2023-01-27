@@ -26,8 +26,8 @@ public class FlashCardRepositoryTest {
         FlashCard flashCard = new FlashCard(word, "cat");
 
         underTest.save(flashCard);
-        Optional<FlashCard> expected = underTest.findFlashCardByWord(word);
+        boolean expected = underTest.findFlashCardByWord(word);
 
-        assertTrue((expected.get().getWord()).equals("kot"));
+        assertTrue(expected);
     }
 }
