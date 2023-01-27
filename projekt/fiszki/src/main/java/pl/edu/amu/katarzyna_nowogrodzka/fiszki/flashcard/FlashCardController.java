@@ -29,7 +29,6 @@ public class FlashCardController {
 
     @DeleteMapping("{flashCardId}")
     public void deleteFlashCard(@PathVariable("flashCardId") Long flashCardId) {
-        System.out.println("Helo");
         flashCardService.deleteFlashCard(flashCardId);
     }
 

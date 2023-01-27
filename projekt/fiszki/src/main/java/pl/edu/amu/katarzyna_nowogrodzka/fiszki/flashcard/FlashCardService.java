@@ -49,6 +49,7 @@ public class FlashCardService {
 
         if (word != null && word.length() > 0 && !Objects.equals(flashCard.getWord(), word)) {
             Boolean flashCardExists = flashCardRepository.findFlashCardByWord(word);
+
             flashCard.setWord(word);
         }
 

@@ -2,6 +2,7 @@ package pl.edu.amu.katarzyna_nowogrodzka.fiszki.flashcard;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.time.LocalDate;
@@ -30,16 +31,12 @@ public class FlashCard {
         private LocalDate nextReview;
 
         private Integer level;
+        public FlashCard() {
+
+        }
         public FlashCard(String word, String translation) {
             this.word = word;
             this.translation = translation;
             this.level = 0;
         }
-
-    public FlashCard(String word, String translation, LocalDate nextReview, Integer level) {
-        this.word = word;
-        this.translation = translation;
-        this.nextReview = nextReview;
-        this.level = level;
-    }
 }
