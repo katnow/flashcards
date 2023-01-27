@@ -43,7 +43,9 @@ export default function BasicModal({open, setOpen}) {
                     translation: translation
                 })
             }).then(res => {
-                console.log(res)
+                if (res.ok) {
+                  setOpen(false);
+                }
             })
         }
     }
@@ -56,8 +58,9 @@ export default function BasicModal({open, setOpen}) {
         onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
+        
       >
-        <Box sx={style}>
+        <Box sx={style} id="modal">
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Dodaj fiszkę
           </Typography>
@@ -82,11 +85,12 @@ export default function BasicModal({open, setOpen}) {
           rows={1}
           defaultValue=""
           variant="standard"
+          sx={{ mt: 2 }}
           onChange={(e) => handleTranslation(e.target.value)}
         />
       </div>
           </Typography>
-          <Button variant="outlined" onClick={() => {sumbitWord()}}>Dodaj</Button>
+          <Button id="add-btn" variant="outlined" onClick={() => {sumbitWord()}}>Dodaj</Button>
         </Box>
       </Modal>
     </div>

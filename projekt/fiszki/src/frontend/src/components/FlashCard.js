@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 
-export default function ImgMediaCard({flashcard, setCurrentFlashCard}) {
+export default function ImgMediaCard({flashcard, setCurrentFlashCard, getFlashCardsToReview}) {
    const {id, word, translation} = flashcard || ''
    const [hidden, setHidden] = useState(true);
    const buttons = [
@@ -23,6 +23,7 @@ export default function ImgMediaCard({flashcard, setCurrentFlashCard}) {
             if (res.ok) {
                 setCurrentFlashCard(prev => prev + 1)
                 setHidden(true)
+                getFlashCardsToReview()
             }
         })
     }

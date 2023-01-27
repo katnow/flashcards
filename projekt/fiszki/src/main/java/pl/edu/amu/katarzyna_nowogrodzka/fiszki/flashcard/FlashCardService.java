@@ -1,11 +1,14 @@
 package pl.edu.amu.katarzyna_nowogrodzka.fiszki.flashcard;
 
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.edu.amu.katarzyna_nowogrodzka.fiszki.flashcard.exception.BadRequestException;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class FlashCardService {
@@ -17,6 +20,23 @@ public class FlashCardService {
 
     public List<FlashCard> getFlashCards() {
         return flashCardRepository.findAll();
+    }
+
+    public List<FlashCard> getFlashCardsToReview() {
+        LocalDate now = LocalDate.now();
+        if (flashCardRepository.count() == 0) {
+            throw new RuntimeException("Nie ma żadnych fiszek do powtórzenia");
+        } else {
+            return flashCardRepository.findAll().stream()
+                    .filter(flashCard -> checkDatesDifference(flashCard.getNextReview() != null ? flashCard.getNextReview() : now, now) >= 0)
+                    .collect(Collectors.toList());
+        }
+    }
+
+    public int checkDatesDifference(LocalDate date1, LocalDate date2) {
+        Period period = Period.between(date1, date2);
+        int days = period.getDays();
+        return days;
     }
 
     public void addNewFlashCard(FlashCard flashCard) {
@@ -79,8 +99,12 @@ public class FlashCardService {
         int daysCount = levelsInDays[currentLevel];
 
         LocalDate today = LocalDate.now();
-        LocalDate  nextReview = today.plusDays(daysCount);
+        LocalDate nextReview = today.plusDays(daysCount);
 
-        flashCard.setNextReview(nextReview);
+        if (option == 2 || option == 1) {
+            flashCard.setNextReview(nextReview);
+        } else {
+            flashCard.setNextReview(today);
+        }
     }
 }

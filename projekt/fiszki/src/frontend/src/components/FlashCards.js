@@ -5,19 +5,32 @@ function FlashCards() {
     const [flashCards, setFlashCards] = useState([]);
     const [currentFlashCard, setCurrentFlashCard] = useState(1);
 
-    useEffect(() => {
-        fetch("http://localhost:8080/api/flashcards").then(res => {
+    const getFlashCardsToReview = () => {
+        fetch("http://localhost:8080/api/flashcards/review/").then(res => {
             res.json().then(data => {
                 setFlashCards(data)
             })
         })
-    },[])
+    }
 
-    console.log(flashCards)
+    useEffect(() => {
+        getFlashCardsToReview();
+    },[])
     
-  return (
-    <FlashCard flashcard={flashCards[currentFlashCard-1]} setCurrentFlashCard={setCurrentFlashCard}/>
-  )
+    const checkFlashCardAvailability = (index) => {
+      if (flashCards[currentFlashCard - 1]) {
+        return flashCards[currentFlashCard - 1]
+      } else {
+        setCurrentFlashCard(1)
+        return flashCards[0];
+      }
+    }
+
+    if (flashCards.length > 0) {
+      return (
+        <FlashCard flashcard={checkFlashCardAvailability(currentFlashCard)} setCurrentFlashCard={setCurrentFlashCard} getFlashCardsToReview={getFlashCardsToReview}/>
+      ) 
+    } else {}
 }
 
 export default FlashCards
