@@ -6,6 +6,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 function FlashCardsList() {
     const [flashcards, setFlashCards] = useState([]);
@@ -58,9 +59,30 @@ function FlashCardsList() {
         setMylist(list)
     }
 
+    const generateXML = () => {
+      fetch("http://localhost:8080/api/flashcards/generateXML/", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/xml"
+        }
+      }).then(res =>res.text().then(data => downloadFile(data))
+      )
+    }
+
+    const downloadFile = (data) => {
+      const element = document.createElement("a");
+      const file = new Blob([data],    
+               {type: 'application/xml;charset=utf-8'});
+      element.href = URL.createObjectURL(file);
+      element.download = "flashCards.xml";
+      document.body.appendChild(element);
+      element.click();
+      }
+
     if (my_list) {
       return (
         <List id="flashcard-list" sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+          <Button variant="outlined" onClick={() => generateXML()}>Pobierz listę fiszek XML</Button>
         {my_list}
       </List>
     );

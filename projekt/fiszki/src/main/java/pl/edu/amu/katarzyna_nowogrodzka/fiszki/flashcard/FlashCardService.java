@@ -1,5 +1,7 @@
 package pl.edu.amu.katarzyna_nowogrodzka.fiszki.flashcard;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,13 +15,17 @@ import java.util.stream.Collectors;
 @Service
 public class FlashCardService {
     private final FlashCardRepository flashCardRepository;
+    @JacksonXmlProperty(localName = "FlashCard")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    private List<FlashCard> flashCards;
 
     public FlashCardService(FlashCardRepository flashCardRepository) {
         this.flashCardRepository = flashCardRepository;
     }
 
     public List<FlashCard> getFlashCards() {
-        return flashCardRepository.findAll();
+        flashCards = flashCardRepository.findAll();
+        return flashCards;
     }
 
     public List<FlashCard> getFlashCardsToReview() {

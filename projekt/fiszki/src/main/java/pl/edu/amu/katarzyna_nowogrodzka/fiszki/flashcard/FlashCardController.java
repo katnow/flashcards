@@ -1,8 +1,11 @@
 package pl.edu.amu.katarzyna_nowogrodzka.fiszki.flashcard;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -21,6 +24,14 @@ public class FlashCardController {
     public List<FlashCard> getFlashCards() {
         return flashCardService.getFlashCards();
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @GetMapping(path = "generateXML/", produces= MediaType.APPLICATION_XML_VALUE)
+    public List<FlashCard> generateXML() {
+        return flashCardService.getFlashCards();
+    }
+
+
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping(path = "review/")

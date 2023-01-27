@@ -1,5 +1,7 @@
 package pl.edu.amu.katarzyna_nowogrodzka.fiszki.flashcard;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NonNull;
@@ -12,6 +14,7 @@ import java.time.Period;
 @Table
 @Getter
 @Setter
+@JacksonXmlRootElement(localName = "FlashCard")
 public class FlashCard {
     @Id
     @SequenceGenerator(
@@ -23,13 +26,16 @@ public class FlashCard {
                 strategy = GenerationType.SEQUENCE,
                 generator = "flashcard_sequence"
         )
+        @JacksonXmlProperty(isAttribute = true)
         private Long id;
-
+        @JacksonXmlProperty
         private String word;
 
+        @JacksonXmlProperty
         private String translation;
+        @JacksonXmlProperty
         private LocalDate nextReview;
-
+        @JacksonXmlProperty
         private Integer level;
         public FlashCard() {
 
