@@ -21,8 +21,8 @@ export default function ImgMediaCard({flashcard, setCurrentFlashCard}) {
 
         }).then(res => {
             if (res.ok) {
-                setHidden(true)
                 setCurrentFlashCard(prev => prev + 1)
+                setHidden(true)
             }
         })
     }
@@ -30,11 +30,11 @@ export default function ImgMediaCard({flashcard, setCurrentFlashCard}) {
   return (
     <Card className="flashcard" sx={{ maxWidth: 345 }} onClick={() => setHidden(false)}>
       <CardContent>
-        <Typography className='word' gutterBottom variant="h5" component="div">
+        <Typography className='word title' gutterBottom variant="h5" component="div" style={{opacity: 1}}>
           {word}
         </Typography>
         <Divider/>
-        <Typography style={hidden ? {visibility: "hidden"} : {}} className='word' gutterBottom variant="h5" component="div">
+        <Typography style={hidden ? {opacity: "0"} : {}} className='word' gutterBottom variant="h5" component="div">
           {translation}
         </Typography>
       </CardContent>

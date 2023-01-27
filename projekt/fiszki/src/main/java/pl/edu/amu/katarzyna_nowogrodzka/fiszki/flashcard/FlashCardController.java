@@ -22,6 +22,7 @@ public class FlashCardController {
         return flashCardService.getFlashCards();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping
     public void registerFlashCard(@RequestBody FlashCard flashCard) {
         flashCardService.addNewFlashCard(flashCard);

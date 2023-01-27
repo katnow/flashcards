@@ -23,8 +23,9 @@ public class FlashCardService {
         Boolean existsWord = flashCardRepository.findFlashCardByWord(flashCard.getWord());
 
         if (existsWord) {
-                throw new BadRequestException("word exists");
+            throw new BadRequestException("word exists");
         }
+            flashCard.setLevel(0);
             flashCardRepository.save(flashCard);
     }
 

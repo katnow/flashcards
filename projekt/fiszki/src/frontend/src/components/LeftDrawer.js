@@ -11,7 +11,7 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-export default function TemporaryDrawer({drawerOpen, setDrawerOpen}) {
+export default function TemporaryDrawer({drawerOpen, setDrawerOpen, setDisplayModal}) {
  
 
   let anchor = 'left';
@@ -24,30 +24,6 @@ export default function TemporaryDrawer({drawerOpen, setDrawerOpen}) {
     setDrawerOpen(open);
   };
 
-  const list = (anchor) => (
-    <Box
-      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
-      role="presentation"
-      onClick={toggleDrawer(anchor, false)}
-      onKeyDown={toggleDrawer(anchor, false)}
-    >
-    <Divider/>
-      <List>
-        {['Dodaj fiszkę', 'Lista fiszek'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-    </Box>
-  );
-
   return (
     <div>
         <React.Fragment key={anchor}>
@@ -56,7 +32,34 @@ export default function TemporaryDrawer({drawerOpen, setDrawerOpen}) {
             open={drawerOpen}
             onClose={toggleDrawer(anchor, false)}
           >
-            {list(anchor)}
+            <Box
+      sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250 }}
+      role="presentation"
+      onClick={toggleDrawer(anchor, false)}
+      onKeyDown={toggleDrawer(anchor, false)}
+    >
+    <Divider/>
+      <List>
+
+        <ListItem disablePadding>
+            <ListItemButton onClick={() => setDisplayModal(true)}>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Dodaj fiszkę'} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <MailIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Lista fiszek'} />
+            </ListItemButton>
+          </ListItem>
+      </List>
+      <Divider />
+    </Box>
           </Drawer>
         </React.Fragment>
     </div>

@@ -1,3 +1,8 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .flashcard {
     display: block;
     margin: 20vh auto;
@@ -10,6 +15,11 @@
 .word {
     text-align: center;
     padding: 30px;
+    transform: opacity 0.5s;
+}
+
+.title {
+    opacity:0;
 }
 
 .buttons {
