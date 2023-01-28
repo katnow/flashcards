@@ -71,6 +71,17 @@ body {
     max-width: 500px;
 }
 
-#flashcard-list .Muidivider-root {
+#flashcard-list .MuiDivider-root {
     margin-left: 0;
+}
+
+#flashcard-list .icon {
+    color: gray;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+#download-xml-btn {
+    margin: 30px 50px;
+    margin-bottom: 10px;
 }
