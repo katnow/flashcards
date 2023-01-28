@@ -52,6 +52,7 @@ public class FlashCardController {
     }
 
     @DeleteMapping("{flashCardId}")
+    @CrossOrigin(origins = "*")
     public void deleteFlashCard(@PathVariable("flashCardId") Long flashCardId) {
         flashCardService.deleteFlashCard(flashCardId);
     }

@@ -7,6 +7,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function FlashCardsList() {
     const [flashcards, setFlashCards] = useState([]);
@@ -27,15 +28,26 @@ function FlashCardsList() {
 
     useEffect(() => {
         createList();
-    }, [flashcards])    
+    }, [flashcards]) 
+    
+    const deleteFlashCard = (id) => {
+      console.log(id)
+      fetch(`http://localhost:8080/api/flashcards/${id}`, {
+        method: "DELETE"
+      }).then(res => {
+        if (res.ok) {
+          getFlashCards();
+        }
+      })
+    }
 
     const createList = () => {
         let list = [];
         flashcards.forEach(flashcard => {
-          const {word, translation} = flashcard || ''
+          const {id, word, translation} = flashcard || ''
             list.push(
               <>
-                <ListItem >
+                <ListItem value={id}>
                   <ListItemText
                     primary={word}
                     secondary={
@@ -51,6 +63,7 @@ function FlashCardsList() {
                     </React.Fragment>
                     }
                   />
+                  <DeleteIcon onClick={(e)=> deleteFlashCard(e.target.parentNode.parentNode.value)}/>
                 </ListItem>
                 <Divider variant="inset" component="li" />
               </>
